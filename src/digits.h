@@ -261,3 +261,23 @@ void printDots(LiquidCrystal_I2C* lcd, bool state) {
     lcd->print(F(" "));
   }
 }
+
+void drawClocks(LiquidCrystal_I2C* lcd, uint8_t hours, uint8_t minutes) {
+  if (hours < 10) {
+    printDigitAt(lcd, 0, 0);
+    printDigitAt(lcd, hours, 1);
+  } else {
+    uint8_t hour = hours % 10;
+    printDigitAt(lcd, hour, 1);
+    printDigitAt(lcd, (hours - hour) / 10, 0);
+  }
+
+  if (minutes < 10) {
+    printDigitAt(lcd, 0, 2);
+    printDigitAt(lcd, minutes, 3);
+  } else {
+    uint8_t minute = minutes % 10;
+    printDigitAt(lcd, minute, 3);
+    printDigitAt(lcd, (minutes - minute) / 10, 2);
+  }
+}
